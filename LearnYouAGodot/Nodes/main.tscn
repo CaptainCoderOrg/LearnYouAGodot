@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://mnxj3jn17b0a"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_w5cbw"]
+[ext_resource type="Resource" uid="uid://ckpc1kwvvgnwt" path="res://stats.tres" id="2_vl017"]
+[ext_resource type="Texture2D" uid="uid://sdttlmp0lsvp" path="res://Sprites/icon.svg" id="3_mkv1h"]
+[ext_resource type="Script" path="res://Scripts/SlopeGround.gd" id="4_fj7v5"]
+[ext_resource type="PackedScene" uid="uid://clesuolpiayyr" path="res://Nodes/coin.tscn" id="5_ycso0"]
+[ext_resource type="Script" path="res://Scripts/CoinLabel.gd" id="6_cje0f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u10d7"]
+radius = 65.0
+
+[sub_resource type="Curve2D" id="Curve2D_txs0y"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1195, 95, 282, 198, -282, -198, 415, 187, 0, 0, 0, 0, -241, -17)
+}
+point_count = 3
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(98, 113)
+floor_snap_length = 60.0
+script = ExtResource("1_w5cbw")
+STATS = ExtResource("2_vl017")
+SPEED = 600.0
+JUMP_VELOCITY = -800.0
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position = Vector2(0, -160)
+position_smoothing_enabled = true
+
+[node name="RayCast2D" type="RayCast2D" parent="CharacterBody2D"]
+target_position = Vector2(0, 80)
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("3_mkv1h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_u10d7")
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(10, 178)
+curve = SubResource("Curve2D_txs0y")
+script = ExtResource("4_fj7v5")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Path2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Path2D/StaticBody2D"]
+
+[node name="Coin" parent="." instance=ExtResource("5_ycso0")]
+position = Vector2(637, 359)
+
+[node name="Coin2" parent="." instance=ExtResource("5_ycso0")]
+position = Vector2(1137, 219)
+
+[node name="Coin3" parent="." instance=ExtResource("5_ycso0")]
+position = Vector2(-177, 74)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 36
+text = "Coins: 0"
+script = ExtResource("6_cje0f")
+stats = ExtResource("2_vl017")
