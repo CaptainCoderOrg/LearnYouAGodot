@@ -1,7 +1,8 @@
 class_name PlayerController
-extends CharacterBody2D
+extends Node
 
 @export var STATS: PlayerStats
+@export var character: CharacterBody2D
 @export var JUMP_VELOCITY = -400.0
 @export var movementController : MovementController
 
@@ -15,7 +16,7 @@ func _ready():
 
 func _physics_process(delta):
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	if Input.is_action_just_pressed("ui_accept") and character.is_on_floor():
+		character.velocity.y = JUMP_VELOCITY
 		
 	direction_changed.emit(Input.get_axis("ui_left", "ui_right"))

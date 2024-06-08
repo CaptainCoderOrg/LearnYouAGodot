@@ -11,11 +11,6 @@ static var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func set_direction(p_direction : float):
 	direction = p_direction
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	# Add the gravity.

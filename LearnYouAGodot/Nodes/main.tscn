@@ -1,15 +1,15 @@
-[gd_scene load_steps=26 format=3 uid="uid://mnxj3jn17b0a"]
+[gd_scene load_steps=27 format=3 uid="uid://mnxj3jn17b0a"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="1_w5cbw"]
 [ext_resource type="Resource" uid="uid://ckpc1kwvvgnwt" path="res://stats.tres" id="2_vl017"]
 [ext_resource type="Texture2D" uid="uid://chrfw7yfhjwbm" path="res://Sprites/oga-tofuman-sprites.png" id="4_8g22f"]
 [ext_resource type="Script" path="res://Scripts/SlopeGround.gd" id="4_fj7v5"]
-[ext_resource type="Script" path="res://SlopedCharacterController.gd" id="4_k6ctr"]
-[ext_resource type="Script" path="res://AnimatedCharacterController.gd" id="5_88kia"]
+[ext_resource type="Script" path="res://Scripts/SlopedCharacterController.gd" id="4_k6ctr"]
+[ext_resource type="Script" path="res://Scripts/AnimatedCharacterController.gd" id="5_88kia"]
 [ext_resource type="PackedScene" uid="uid://clesuolpiayyr" path="res://Nodes/coin.tscn" id="5_ycso0"]
-[ext_resource type="Script" path="res://MovementController.gd" id="6_5fmpg"]
+[ext_resource type="Script" path="res://Scripts/MovementController.gd" id="6_5fmpg"]
 [ext_resource type="Script" path="res://Scripts/CoinLabel.gd" id="6_cje0f"]
-[ext_resource type="Script" path="res://Nodes/Enemy (CharacterBody2D).gd" id="7_f584r"]
+[ext_resource type="Script" path="res://Scripts/PatrollingAIBehaviour.gd" id="10_b0xy0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u10d7"]
 radius = 36.0
@@ -68,6 +68,9 @@ _data = {
 }
 point_count = 3
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bofoy"]
+size = Vector2(20, 43.205)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t0ovp"]
 radius = 7.25
 height = 17.0
@@ -122,13 +125,10 @@ animations = [{
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Player (CharacterBody2D)" type="CharacterBody2D" parent="." node_paths=PackedStringArray("movementController")]
+[node name="Player (CharacterBody2D)" type="CharacterBody2D" parent="."]
 position = Vector2(98, 113)
+collision_mask = 15
 floor_snap_length = 60.0
-script = ExtResource("1_w5cbw")
-STATS = ExtResource("2_vl017")
-JUMP_VELOCITY = -600.0
-movementController = NodePath("MovementController")
 
 [node name="Camera2D" type="Camera2D" parent="Player (CharacterBody2D)"]
 position_smoothing_enabled = true
@@ -140,6 +140,7 @@ drag_bottom_margin = 0.65
 
 [node name="RayCast2D" type="RayCast2D" parent="Player (CharacterBody2D)"]
 target_position = Vector2(0, 38)
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player (CharacterBody2D)"]
 shape = SubResource("CircleShape2D_u10d7")
@@ -165,23 +166,32 @@ script = ExtResource("6_5fmpg")
 character = NodePath("..")
 SPEED = 400.0
 
+[node name="PlayerController" type="Node" parent="Player (CharacterBody2D)" node_paths=PackedStringArray("character", "movementController")]
+script = ExtResource("1_w5cbw")
+STATS = ExtResource("2_vl017")
+character = NodePath("..")
+JUMP_VELOCITY = -600.0
+movementController = NodePath("../MovementController")
+
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(11, 178)
 curve = SubResource("Curve2D_txs0y")
 script = ExtResource("4_fj7v5")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Path2D"]
+collision_layer = 8
+collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Path2D/StaticBody2D"]
 
 [node name="Coin" parent="." instance=ExtResource("5_ycso0")]
-position = Vector2(637, 359)
+position = Vector2(676, 309)
 
 [node name="Coin2" parent="." instance=ExtResource("5_ycso0")]
 position = Vector2(1137, 219)
 
 [node name="Coin3" parent="." instance=ExtResource("5_ycso0")]
-position = Vector2(-177, 74)
+position = Vector2(-181, 117)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -195,9 +205,13 @@ stats = ExtResource("2_vl017")
 
 [node name="Enemy (CharacterBody2D)" type="CharacterBody2D" parent="."]
 position = Vector2(453, 115)
-script = ExtResource("7_f584r")
-direction = -1.0
-SPEED = 100.0
+collision_layer = 4
+collision_mask = 13
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="Enemy (CharacterBody2D)"]
+shape = SubResource("RectangleShape2D_bofoy")
+target_position = Vector2(-22.435, 0)
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy (CharacterBody2D)"]
 scale = Vector2(4, 4)
@@ -213,6 +227,7 @@ frame_progress = 0.524218
 [node name="RayCast2D" type="RayCast2D" parent="Enemy (CharacterBody2D)"]
 scale = Vector2(4, 4)
 target_position = Vector2(0, 10)
+collision_mask = 8
 
 [node name="SlopedCharacterController" type="Node" parent="Enemy (CharacterBody2D)" node_paths=PackedStringArray("characterBody", "sprite", "ray")]
 script = ExtResource("4_k6ctr")
@@ -225,3 +240,14 @@ script = ExtResource("5_88kia")
 character = NodePath("..")
 animated_sprite = NodePath("../AnimatedSprite2D")
 flip_h = true
+
+[node name="MovementController" type="Node" parent="Enemy (CharacterBody2D)" node_paths=PackedStringArray("character")]
+script = ExtResource("6_5fmpg")
+character = NodePath("..")
+direction = -1.0
+SPEED = 200.0
+
+[node name="PatrollingAIBehaviour" type="Node" parent="Enemy (CharacterBody2D)" node_paths=PackedStringArray("movement_controller", "shape_cast")]
+script = ExtResource("10_b0xy0")
+movement_controller = NodePath("../MovementController")
+shape_cast = NodePath("../ShapeCast2D")
