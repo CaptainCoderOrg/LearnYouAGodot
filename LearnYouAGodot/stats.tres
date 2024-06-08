@@ -1,8 +1,9 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ckpc1kwvvgnwt"]
+[gd_resource type="Resource" script_class="PlayerStats" load_steps=2 format=3 uid="uid://ckpc1kwvvgnwt"]
 
 [ext_resource type="Script" path="res://Scripts/stats.gd" id="1_5psee"]
 
 [resource]
 script = ExtResource("1_5psee")
 health = 0
+coins = 0
 strings = PackedStringArray()
