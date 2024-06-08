@@ -5,6 +5,8 @@ extends Node
 @export var direction : float
 @export var SPEED : float
 
+signal on_collision(collision : KinematicCollision2D)
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 static var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -23,4 +25,8 @@ func _physics_process(delta):
 		character.velocity.x = direction * SPEED
 	else:
 		character.velocity.x = move_toward(character.velocity.x, 0, SPEED)
-	character.move_and_slide()
+	
+	if character.move_and_slide():
+		for c_ix in character.get_slide_collision_count():
+			var collision : KinematicCollision2D = character.get_slide_collision(c_ix)
+			on_collision.emit(collision)

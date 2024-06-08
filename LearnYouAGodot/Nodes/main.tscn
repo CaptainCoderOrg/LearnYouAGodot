@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://clesuolpiayyr" path="res://Nodes/coin.tscn" id="5_ycso0"]
 [ext_resource type="Script" path="res://Scripts/MovementController.gd" id="6_5fmpg"]
 [ext_resource type="Script" path="res://Scripts/CoinLabel.gd" id="6_cje0f"]
+[ext_resource type="Script" path="res://Scripts/StompEnemyAttackBehaviour.gd" id="7_u6thb"]
 [ext_resource type="Script" path="res://Scripts/PatrollingAIBehaviour.gd" id="10_b0xy0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u10d7"]
@@ -64,12 +65,9 @@ animations = [{
 
 [sub_resource type="Curve2D" id="Curve2D_txs0y"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1195, 95, 282, 198, -282, -198, 547, 124, 0, 0, 0, 0, -241, -17)
+"points": PackedVector2Array(0, 0, 0, 0, 1296, -35, 0, 0, 0, 0, 1165, -35, 0, 0, 0, 0, 1169, 83, 282, 198, -282, -198, 547, 124, 0, 0, 0, 0, -214, 9, 0, 0, 0, 0, -231, -156, 0, 0, 0, 0, -326, -147)
 }
-point_count = 3
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bofoy"]
-size = Vector2(20, 43.205)
+point_count = 7
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t0ovp"]
 radius = 7.25
@@ -173,16 +171,20 @@ character = NodePath("..")
 JUMP_VELOCITY = -600.0
 movementController = NodePath("../MovementController")
 
+[node name="StompEnemyAttackBehaviour" type="Node" parent="Player (CharacterBody2D)" node_paths=PackedStringArray("movement_controller")]
+script = ExtResource("7_u6thb")
+movement_controller = NodePath("../MovementController")
+
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(11, 178)
 curve = SubResource("Curve2D_txs0y")
 script = ExtResource("4_fj7v5")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Path2D"]
+[node name="Ground (StaticBody2D)" type="StaticBody2D" parent="Path2D"]
 collision_layer = 8
 collision_mask = 0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Path2D/StaticBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Path2D/Ground (StaticBody2D)"]
 
 [node name="Coin" parent="." instance=ExtResource("5_ycso0")]
 position = Vector2(676, 309)
@@ -203,15 +205,10 @@ text = "Coins: 0"
 script = ExtResource("6_cje0f")
 stats = ExtResource("2_vl017")
 
-[node name="Enemy (CharacterBody2D)" type="CharacterBody2D" parent="."]
+[node name="Enemy (CharacterBody2D)" type="CharacterBody2D" parent="." groups=["StompableEnemy"]]
 position = Vector2(453, 115)
 collision_layer = 4
 collision_mask = 13
-
-[node name="ShapeCast2D" type="ShapeCast2D" parent="Enemy (CharacterBody2D)"]
-shape = SubResource("RectangleShape2D_bofoy")
-target_position = Vector2(-22.435, 0)
-collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy (CharacterBody2D)"]
 scale = Vector2(4, 4)
@@ -247,7 +244,6 @@ character = NodePath("..")
 direction = -1.0
 SPEED = 200.0
 
-[node name="PatrollingAIBehaviour" type="Node" parent="Enemy (CharacterBody2D)" node_paths=PackedStringArray("movement_controller", "shape_cast")]
+[node name="PatrollingAIBehaviour" type="Node" parent="Enemy (CharacterBody2D)" node_paths=PackedStringArray("movement_controller")]
 script = ExtResource("10_b0xy0")
 movement_controller = NodePath("../MovementController")
-shape_cast = NodePath("../ShapeCast2D")

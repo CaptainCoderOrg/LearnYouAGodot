@@ -2,7 +2,7 @@ extends Path2D
 
 @export_category("Slope2D")
 
-@onready var _collision_polygon = $StaticBody2D/CollisionPolygon2D
+@onready var _collision_polygon = $"Ground (StaticBody2D)/CollisionPolygon2D"
 
 func _ready():
 	_bake_slope()

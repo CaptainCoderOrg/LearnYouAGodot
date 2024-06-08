@@ -4,5 +4,4 @@ extends Area2D
 
 func _on_body_entered(body):
 	stats.set_coins(stats.coins + 1)
-	print(stats.coins)
 	queue_free()
