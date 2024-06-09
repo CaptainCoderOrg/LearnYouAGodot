@@ -1,0 +1,126 @@
+[gd_scene load_steps=16 format=3 uid="uid://cqqjp15f75vek"]
+
+[ext_resource type="Texture2D" uid="uid://chrfw7yfhjwbm" path="res://Sprites/oga-tofuman-sprites.png" id="1_twbui"]
+[ext_resource type="Script" path="res://Scripts/SlopedCharacterController.gd" id="2_5jifm"]
+[ext_resource type="Script" path="res://Scripts/AnimatedCharacterController.gd" id="3_wgbn2"]
+[ext_resource type="Script" path="res://Scripts/MovementController.gd" id="4_gnyxh"]
+[ext_resource type="Script" path="res://Scripts/PatrollingAIBehaviour.gd" id="5_ciwcf"]
+[ext_resource type="Script" path="res://Scripts/LivingBehaviour.gd" id="6_vafin"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t0ovp"]
+radius = 7.25
+height = 17.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sndib"]
+atlas = ExtResource("1_twbui")
+region = Rect2(64, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxfrx"]
+atlas = ExtResource("1_twbui")
+region = Rect2(64, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhjnq"]
+atlas = ExtResource("1_twbui")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0jcq"]
+atlas = ExtResource("1_twbui")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilcrl"]
+atlas = ExtResource("1_twbui")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ss8v0"]
+atlas = ExtResource("1_twbui")
+region = Rect2(64, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_px5ud"]
+atlas = ExtResource("1_twbui")
+region = Rect2(64, 64, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ho838"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sndib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxfrx")
+}],
+"loop": false,
+"name": &"death",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhjnq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0jcq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilcrl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ss8v0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_px5ud")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[node name="Enemy (CharacterBody2D)" type="CharacterBody2D" groups=["StompableEnemy"]]
+position = Vector2(453, 115)
+collision_layer = 4
+collision_mask = 13
+platform_floor_layers = 4294901768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(4, 4)
+shape = SubResource("CapsuleShape2D_t0ovp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_ho838")
+animation = &"idle"
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+scale = Vector2(4, 4)
+target_position = Vector2(0, 10)
+collision_mask = 8
+
+[node name="SlopedCharacterController" type="Node" parent="." node_paths=PackedStringArray("characterBody", "sprite", "ray")]
+script = ExtResource("2_5jifm")
+characterBody = NodePath("")
+sprite = NodePath("")
+ray = NodePath("")
+
+[node name="AnimatedCharacterController" type="Node" parent="." node_paths=PackedStringArray("character", "animated_sprite")]
+script = ExtResource("3_wgbn2")
+character = NodePath("")
+animated_sprite = NodePath("")
+flip_h = true
+
+[node name="MovementController" type="Node" parent="." node_paths=PackedStringArray("character")]
+script = ExtResource("4_gnyxh")
+character = NodePath("")
+direction = -1.0
+SPEED = 200.0
+
+[node name="PatrollingAIBehaviour" type="Node" parent="." node_paths=PackedStringArray("movement_controller")]
+script = ExtResource("5_ciwcf")
+movement_controller = NodePath("")
+
+[node name="LivingBehaviour" type="Node" parent="." node_paths=PackedStringArray("character_body", "movement_controller")]
+script = ExtResource("6_vafin")
+character_body = NodePath("")
+movement_controller = NodePath("")
