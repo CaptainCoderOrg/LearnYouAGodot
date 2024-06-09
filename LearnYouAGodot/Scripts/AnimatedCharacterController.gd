@@ -4,6 +4,7 @@ extends Node
 @export var character : CharacterBody2D
 @export var animated_sprite : AnimatedSprite2D
 @export var flip_h : bool
+@onready var living_behaviour = $"../LivingBehaviour"
 
 func update_facing():
 	if character.velocity.x < 0:
@@ -12,7 +13,9 @@ func update_facing():
 		animated_sprite.flip_h = flip_h
 
 func update_animation():
-	if character.velocity.x == 0:
+	if not living_behaviour.is_alive:
+		animated_sprite.animation = "death"
+	elif character.velocity.x == 0:
 		animated_sprite.animation = "idle"
 	else:
 		animated_sprite.animation = "walk"
