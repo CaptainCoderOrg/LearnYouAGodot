@@ -254,6 +254,7 @@ script = ExtResource("5_88kia")
 character = NodePath("..")
 animated_sprite = NodePath("../AnimatedSprite2D")
 animation_player = NodePath("../AnimationPlayer")
+splat_rarity = 0.25
 
 [node name="MovementController" type="Node" parent="Player (CharacterBody2D)" node_paths=PackedStringArray("character")]
 script = ExtResource("6_5fmpg")
@@ -274,6 +275,7 @@ movement_controller = NodePath("../MovementController")
 
 [node name="LivingBehaviour" type="Node" parent="Player (CharacterBody2D)" node_paths=PackedStringArray("character_body", "movement_controller", "spawn_point", "body")]
 script = ExtResource("9_s1lv7")
+respawn_time = 2.0
 character_body = NodePath("..")
 movement_controller = NodePath("../MovementController")
 spawn_point = NodePath("../../SpawnPoint (Node2D)")
@@ -290,6 +292,6 @@ script = ExtResource("6_cje0f")
 stats = ExtResource("2_vl017")
 
 [connection signal="body_entered" from="TileMap/Coin" to="TileMap/Coin" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@17861" to="TileMap/@Area2D@17861" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@17862" to="TileMap/@Area2D@17862" method="_on_body_entered"]
-[connection signal="body_entered" from="TileMap/@Area2D@17863" to="TileMap/@Area2D@17863" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@100185" to="TileMap/@Area2D@100185" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@100186" to="TileMap/@Area2D@100186" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@100187" to="TileMap/@Area2D@100187" method="_on_body_entered"]

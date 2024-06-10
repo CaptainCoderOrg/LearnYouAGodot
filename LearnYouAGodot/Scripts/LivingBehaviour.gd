@@ -2,6 +2,7 @@ class_name LivingBehaviour
 extends Node
 
 @export var is_alive : bool = true
+@export var respawn_time : float = 5
 @export var character_body : CharacterBody2D
 @export var movement_controller : MovementController
 @export var spawn_point : Node2D
@@ -22,7 +23,7 @@ func kill():
 		_collision_mask = character_body.collision_mask
 		character_body.collision_mask = 0
 		character_body.velocity.y = -300
-		var timer : SceneTreeTimer = get_tree().create_timer(5, false)
+		var timer : SceneTreeTimer = get_tree().create_timer(respawn_time, false)
 		timer.timeout.connect(on_timeout)
 
 func respawn():
