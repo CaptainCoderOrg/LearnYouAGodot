@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7l2pcxehv22p"]
+[gd_scene load_steps=4 format=3 uid="uid://c7l2pcxehv22p"]
 
 [ext_resource type="Texture2D" uid="uid://cag110l3ohguw" path="res://Sprites/oga-tofuman-tiles.png" id="1_0cvn2"]
 [ext_resource type="Script" path="res://Scripts/EnemyBehaviour/KillPlayerOnTouchBehaviour.gd" id="2_hr1y7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7gdlf"]
+size = Vector2(18, 7)
 
 [node name="Spikes" type="Node2D"]
 
@@ -11,6 +14,7 @@ region_enabled = true
 region_rect = Rect2(160, 0, 16, 16)
 
 [node name="PlayerDeathCollider(Area2D)" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlayerDeathCollider(Area2D)"]
 polygon = PackedVector2Array(-8, 8, -4, 0, -1, 6, 3, 0, 7, 8)
@@ -18,3 +22,11 @@ polygon = PackedVector2Array(-8, 8, -4, 0, -1, 6, 3, 0, 7, 8)
 [node name="KillPlayerOnTouchBehaviour" type="Node" parent="." node_paths=PackedStringArray("area_2d")]
 script = ExtResource("2_hr1y7")
 area_2d = NodePath("../PlayerDeathCollider(Area2D)")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_7gdlf")
