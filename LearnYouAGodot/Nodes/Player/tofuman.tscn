@@ -1,0 +1,266 @@
+[gd_scene load_steps=22 format=3 uid="uid://dev27edc5nxmy"]
+
+[ext_resource type="Texture2D" uid="uid://chrfw7yfhjwbm" path="res://Sprites/oga-tofuman-sprites.png" id="1_k8gbv"]
+[ext_resource type="Script" path="res://Scripts/SlopedCharacterController.gd" id="2_jov4q"]
+[ext_resource type="Script" path="res://Scripts/AnimatedCharacterController.gd" id="3_kmhv2"]
+[ext_resource type="Script" path="res://Scripts/MovementController.gd" id="4_rnsba"]
+[ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="5_wljd5"]
+[ext_resource type="Resource" uid="uid://ckpc1kwvvgnwt" path="res://stats.tres" id="6_xyo70"]
+[ext_resource type="Script" path="res://Scripts/StompEnemyAttackBehaviour.gd" id="7_1d4gq"]
+[ext_resource type="Script" path="res://Scripts/RespawnLivingBehaviour.gd" id="8_gojm0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kb204"]
+size = Vector2(54, 60)
+
+[sub_resource type="Animation" id="Animation_4mlv8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_154cs"]
+resource_name = "SPLAT!"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.5),
+"transitions": PackedFloat32Array(1, 0.5, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 80), Vector2(0, 500)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [0.0, 1.25664]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.5, 2),
+"update": 0,
+"values": [Vector2(4, 4), Vector2(26.73, 26.73)]
+}
+
+[sub_resource type="Animation" id="Animation_m4mks"]
+resource_name = "death_spin"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3rvm2"]
+_data = {
+"RESET": SubResource("Animation_4mlv8"),
+"SPLAT!": SubResource("Animation_154cs"),
+"death_spin": SubResource("Animation_m4mks")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i71rf"]
+atlas = ExtResource("1_k8gbv")
+region = Rect2(16, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pncw"]
+atlas = ExtResource("1_k8gbv")
+region = Rect2(16, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fblmx"]
+atlas = ExtResource("1_k8gbv")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uitr4"]
+atlas = ExtResource("1_k8gbv")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwxps"]
+atlas = ExtResource("1_k8gbv")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyqbe"]
+atlas = ExtResource("1_k8gbv")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nrfs"]
+atlas = ExtResource("1_k8gbv")
+region = Rect2(16, 64, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xwhng"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i71rf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pncw")
+}],
+"loop": false,
+"name": &"death",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fblmx")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uitr4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mwxps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyqbe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4nrfs")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player (CharacterBody2D)" type="CharacterBody2D" parent="." groups=["Player"]]
+position = Vector2(2834, 187)
+collision_mask = 15
+floor_snap_length = 60.0
+platform_floor_layers = 4294901768
+
+[node name="Camera2D" type="Camera2D" parent="Player (CharacterBody2D)"]
+offset = Vector2(0, -100)
+limit_left = -64
+limit_top = 50
+limit_right = 5670
+limit_bottom = 700
+limit_smoothed = true
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_vertical_offset = -1.0
+drag_left_margin = 0.0
+drag_top_margin = 0.0
+drag_right_margin = 0.0
+drag_bottom_margin = 0.0
+editor_draw_limits = true
+
+[node name="RayCast2D" type="RayCast2D" parent="Player (CharacterBody2D)"]
+target_position = Vector2(0, 38)
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player (CharacterBody2D)"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_kb204")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player (CharacterBody2D)"]
+libraries = {
+"": SubResource("AnimationLibrary_3rvm2")
+}
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player (CharacterBody2D)"]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_xwhng")
+animation = &"death"
+
+[node name="SlopedCharacterController" type="Node" parent="Player (CharacterBody2D)" node_paths=PackedStringArray("characterBody", "sprite", "ray")]
+script = ExtResource("2_jov4q")
+characterBody = NodePath("..")
+sprite = NodePath("../AnimatedSprite2D")
+ray = NodePath("../RayCast2D")
+
+[node name="AnimatedCharacterController" type="Node" parent="Player (CharacterBody2D)" node_paths=PackedStringArray("character", "animated_sprite", "animation_player")]
+script = ExtResource("3_kmhv2")
+character = NodePath("..")
+animated_sprite = NodePath("../AnimatedSprite2D")
+animation_player = NodePath("../AnimationPlayer")
+splat_rarity = 0.25
+
+[node name="MovementController" type="Node" parent="Player (CharacterBody2D)" node_paths=PackedStringArray("character")]
+script = ExtResource("4_rnsba")
+character = NodePath("..")
+SPEED = 400.0
+fall_velocity_cutoff = -400.0
+
+[node name="PlayerController" type="Node" parent="Player (CharacterBody2D)" node_paths=PackedStringArray("character", "movementController")]
+script = ExtResource("5_wljd5")
+STATS = ExtResource("6_xyo70")
+character = NodePath("..")
+JUMP_MULTIPLIER = 4
+movementController = NodePath("../MovementController")
+run_mulitiplier = 1.5
+
+[node name="StompEnemyAttackBehaviour" type="Node" parent="Player (CharacterBody2D)" node_paths=PackedStringArray("movement_controller", "player_controller")]
+script = ExtResource("7_1d4gq")
+movement_controller = NodePath("../MovementController")
+player_controller = NodePath("../PlayerController")
+bounce_force = -500.0
+
+[node name="LivingBehaviour" type="Node" parent="Player (CharacterBody2D)" node_paths=PackedStringArray("movement_controller", "spawn_point", "body")]
+script = ExtResource("8_gojm0")
+respawn_time = 2.0
+movement_controller = NodePath("../MovementController")
+spawn_point = NodePath("../..")
+body = NodePath("..")
