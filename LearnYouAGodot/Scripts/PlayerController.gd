@@ -4,6 +4,7 @@ extends Node
 @export var STATS: PlayerStats
 @export var character: CharacterBody2D
 @export var JUMP_VELOCITY = -400.0
+@export var JUMP_MULTIPLIER = 16
 @export var movementController : MovementController
 @export var run_mulitiplier = 1.2
 @export var coyote_frames = 8
@@ -34,7 +35,7 @@ func _physics_process(delta):
 		jump_frames -= 1
 
 	if Input.is_action_just_pressed("ui_accept") and can_jump():
-		character.velocity.y = JUMP_VELOCITY
+		character.velocity.y = JUMP_VELOCITY * JUMP_MULTIPLIER
 		jump_frames = 0
 	
 	direction_changed.emit(Input.get_axis("ui_left", "ui_right"))

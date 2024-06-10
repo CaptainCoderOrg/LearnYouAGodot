@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/PlayerController.gd" id="6_1arpv"]
 [ext_resource type="Resource" uid="uid://ckpc1kwvvgnwt" path="res://stats.tres" id="7_pdfyh"]
 [ext_resource type="Script" path="res://Scripts/StompEnemyAttackBehaviour.gd" id="8_267yr"]
-[ext_resource type="Script" path="res://Scripts/PlayerLivingBehaviour.gd" id="9_y0tg3"]
+[ext_resource type="Script" path="res://Scripts/RespawnLivingBehaviour.gd" id="9_y0tg3"]
 [ext_resource type="Script" path="res://Scripts/CoinLabel.gd" id="10_iqcmf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w1n2m"]

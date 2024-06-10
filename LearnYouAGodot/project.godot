@@ -36,7 +36,7 @@ run={
 
 [physics]
 
-2d/default_gravity=3920.0
+2d/default_gravity=7680.0
 
 [rendering]
 

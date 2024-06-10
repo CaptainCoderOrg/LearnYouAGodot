@@ -10,6 +10,6 @@ func _ready():
 func handle_body_entered(body: Node2D):
 	if body.is_in_group("Player"):
 		var livingBehaviour = body.get_node("LivingBehaviour")
-		if livingBehaviour is PlayerLivingBehaviour:
+		if livingBehaviour is RespawnLivingBehaviour:
 			livingBehaviour.kill()
 		
