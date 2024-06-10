@@ -86,31 +86,27 @@ collision_mask = 13
 platform_floor_layers = 4294901768
 
 [node name="PlayerDeathCollider(Area2D)" type="Area2D" parent="."]
-scale = Vector2(4, 4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDeathCollider(Area2D)"]
 position = Vector2(0, 2.75)
 shape = SubResource("RectangleShape2D_g7siq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(4, 4)
 shape = ExtResource("1_4x8bu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_ho838")
 animation = &"idle"
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-scale = Vector2(4, 4)
 target_position = Vector2(0, 10)
 collision_mask = 8
 
 [node name="PlatformCheck" type="Node2D" parent="."]
 
 [node name="RayCast2D" type="RayCast2D" parent="PlatformCheck"]
-position = Vector2(-28, 0)
-target_position = Vector2(0, 40)
+position = Vector2(-8, 0)
+target_position = Vector2(0, 10)
 collision_mask = 8
 
 [node name="SlopedCharacterController" type="Node" parent="." node_paths=PackedStringArray("characterBody", "sprite", "ray")]
@@ -143,5 +139,6 @@ movement_controller = NodePath("../MovementController")
 [node name="PlatformPatrolBehaviour" type="Node" parent="."]
 script = ExtResource("7_xs3su")
 
-[node name="KillPlayerOnTouchBehaviour" type="Node" parent="."]
+[node name="KillPlayerOnTouchBehaviour" type="Node" parent="." node_paths=PackedStringArray("area_2d")]
 script = ExtResource("8_ibu23")
+area_2d = NodePath("../PlayerDeathCollider(Area2D)")

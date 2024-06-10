@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch5mhn0q7c500"]
+
+[ext_resource type="Texture2D" uid="uid://cag110l3ohguw" path="res://Sprites/oga-tofuman-tiles.png" id="1_bpefg"]
+[ext_resource type="Script" path="res://Scripts/EnemyBehaviour/KillPlayerOnTouchBehaviour.gd" id="2_vxicw"]
+
+[node name="Spikes" type="Node2D"]
+scale = Vector2(1, -1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bpefg")
+region_enabled = true
+region_rect = Rect2(160, 0, 16, 16)
+
+[node name="PlayerDeathCollider(Area2D)" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlayerDeathCollider(Area2D)"]
+polygon = PackedVector2Array(-8, 8, -4, 0, -1, 6, 3, 0, 7, 8)
+
+[node name="KillPlayerOnTouchBehaviour" type="Node" parent="." node_paths=PackedStringArray("area_2d")]
+script = ExtResource("2_vxicw")
+area_2d = NodePath("../PlayerDeathCollider(Area2D)")

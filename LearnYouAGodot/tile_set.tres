@@ -1,6 +1,10 @@
-[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://dnmwiqwo7h8h7"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://dnmwiqwo7h8h7"]
 
 [ext_resource type="Texture2D" uid="uid://cag110l3ohguw" path="res://Sprites/oga-tofuman-tiles.png" id="1_hhfe6"]
+[ext_resource type="PackedScene" uid="uid://c7l2pcxehv22p" path="res://Nodes/spikes.tscn" id="2_wciv3"]
+[ext_resource type="PackedScene" uid="uid://glwktcqa2iqq" path="res://Nodes/enemy_(character_body_2d).tscn" id="3_noibm"]
+[ext_resource type="PackedScene" uid="uid://clesuolpiayyr" path="res://Nodes/coin.tscn" id="4_1f00n"]
+[ext_resource type="PackedScene" uid="uid://ch5mhn0q7c500" path="res://Nodes/spikes_down.tscn" id="5_0w61w"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_0y2lp"]
 tile_data = PackedInt32Array(0, 262144, 2, 1, 65536, 0, 2, 65536, 0, 3, 65536, 0, 4, 327680, 2)
@@ -285,8 +289,16 @@ texture = ExtResource("1_hhfe6")
 10:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:7/0/physics_layer_0/angular_velocity = 0.0
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_xhtrj"]
+resource_name = "Hazards"
+scenes/1/scene = ExtResource("2_wciv3")
+scenes/2/scene = ExtResource("3_noibm")
+scenes/3/scene = ExtResource("4_1f00n")
+scenes/4/scene = ExtResource("5_0w61w")
+
 [resource]
 physics_layer_0/collision_layer = 8
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_qby4m")
+sources/1 = SubResource("TileSetScenesCollectionSource_xhtrj")
 pattern_0 = SubResource("TileMapPattern_0y2lp")

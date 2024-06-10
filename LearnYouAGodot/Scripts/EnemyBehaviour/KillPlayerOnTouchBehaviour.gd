@@ -1,7 +1,7 @@
 class_name KillPlayerOnTouchBehaviour
 extends Node
 
-@onready var area_2d : Area2D = $"../PlayerDeathCollider(Area2D)"
+@export var area_2d : Area2D
 
 
 func _ready():

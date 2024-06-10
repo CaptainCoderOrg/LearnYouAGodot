@@ -8,7 +8,7 @@
 radius = 50.0
 
 [node name="Coin" type="Area2D"]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.063, 0.063)
 collision_layer = 2
 script = ExtResource("1_bwjxn")
 stats = ExtResource("2_xflvu")
