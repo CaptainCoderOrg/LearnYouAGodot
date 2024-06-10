@@ -5,7 +5,16 @@ extends Node
 @export var animated_sprite : AnimatedSprite2D
 @export var animation_player : AnimationPlayer
 @export var flip_h : bool
+## Probabilty of the SPLAT! animation showing up.
+@export var splat_rarity: float = 0.9
 @onready var living_behaviour = $"../LivingBehaviour"
+@onready var random_chance: float = randf()
+
+func _ready():
+	living_behaviour.died.connect(_parent_died)
+
+func _parent_died():
+	random_chance = randf()
 
 func update_facing():
 	if character.velocity.x < 0:
@@ -18,7 +27,10 @@ func update_animation():
 		if living_behaviour.is_alive:
 			animation_player.stop()
 		else:
-			animation_player.play("death_spin")
+			if random_chance > splat_rarity:
+				animation_player.play("death_spin")
+			else:
+				animation_player.play("SPLAT!")
 	if not living_behaviour.is_alive:
 		animated_sprite.animation = "death"
 	elif character.velocity.x == 0:
