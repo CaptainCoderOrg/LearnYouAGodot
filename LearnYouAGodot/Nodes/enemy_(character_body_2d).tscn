@@ -142,3 +142,5 @@ script = ExtResource("7_xs3su")
 [node name="KillPlayerOnTouchBehaviour" type="Node" parent="." node_paths=PackedStringArray("area_2d")]
 script = ExtResource("8_ibu23")
 area_2d = NodePath("../PlayerDeathCollider(Area2D)")
+
+[connection signal="area_entered" from="PlayerDeathCollider(Area2D)" to="KillPlayerOnTouchBehaviour" method="_on_player_death_collider_area_2d_area_entered"]
