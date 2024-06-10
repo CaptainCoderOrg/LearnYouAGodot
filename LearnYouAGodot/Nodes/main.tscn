@@ -212,7 +212,7 @@ platform_floor_layers = 4294901768
 offset = Vector2(0, -100)
 limit_left = -64
 limit_top = 50
-limit_right = 5370
+limit_right = 5670
 limit_bottom = 700
 limit_smoothed = true
 position_smoothing_enabled = true
@@ -260,6 +260,7 @@ splat_rarity = 0.25
 script = ExtResource("6_5fmpg")
 character = NodePath("..")
 SPEED = 400.0
+fall_velocity_cutoff = -400.0
 
 [node name="PlayerController" type="Node" parent="Player (CharacterBody2D)" node_paths=PackedStringArray("character", "movementController")]
 script = ExtResource("1_w5cbw")

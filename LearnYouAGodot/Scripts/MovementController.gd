@@ -4,6 +4,7 @@ extends Node
 @export var character : CharacterBody2D
 @export var direction : float
 @export var SPEED : float
+@export var fall_velocity_cutoff : float = -100
 var multiplier : float = 1
 
 signal on_collision(collision : KinematicCollision2D)
@@ -19,6 +20,8 @@ func set_direction(p_direction : float):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	if character.velocity.y < fall_velocity_cutoff and Input.is_action_just_released("jump"):
+		character.velocity.y = fall_velocity_cutoff
 	# Add the gravity.
 	if not character.is_on_floor():
 		character.velocity.y += gravity * delta

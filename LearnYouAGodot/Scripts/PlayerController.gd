@@ -34,7 +34,7 @@ func _physics_process(delta):
 	else:
 		jump_frames -= 1
 
-	if Input.is_action_just_pressed("ui_accept") and can_jump():
+	if Input.is_action_just_pressed("jump") and can_jump():
 		character.velocity.y = JUMP_VELOCITY * JUMP_MULTIPLIER
 		jump_frames = 0
 	
