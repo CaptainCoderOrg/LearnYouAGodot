@@ -1,4 +1,4 @@
-class_name PatrollingAIBehaviour
+class_name TurnOnBumpBehaviour
 extends Node
 
 @export var movement_controller : MovementController

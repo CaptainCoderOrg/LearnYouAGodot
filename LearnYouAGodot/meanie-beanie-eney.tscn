@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/SlopedCharacterController.gd" id="2_5jifm"]
 [ext_resource type="Script" path="res://Scripts/AnimatedCharacterController.gd" id="3_wgbn2"]
 [ext_resource type="Script" path="res://Scripts/MovementController.gd" id="4_gnyxh"]
-[ext_resource type="Script" path="res://Scripts/PatrollingAIBehaviour.gd" id="5_ciwcf"]
+[ext_resource type="Script" path="res://Scripts/EnemyBehaviour/TurnOnBumpBehaviour.gd" id="5_ciwcf"]
 [ext_resource type="Script" path="res://Scripts/LivingBehaviour.gd" id="6_vafin"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t0ovp"]

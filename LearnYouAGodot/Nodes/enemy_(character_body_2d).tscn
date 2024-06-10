@@ -1,15 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://glwktcqa2iqq"]
+[gd_scene load_steps=19 format=3 uid="uid://glwktcqa2iqq"]
 
+[ext_resource type="Shape2D" uid="uid://bsplsps6pwkpr" path="res://Nodes/Enemy/enemy_shape.tres" id="1_4x8bu"]
 [ext_resource type="Texture2D" uid="uid://chrfw7yfhjwbm" path="res://Sprites/oga-tofuman-sprites.png" id="1_tqn8l"]
 [ext_resource type="Script" path="res://Scripts/SlopedCharacterController.gd" id="2_h4mhu"]
 [ext_resource type="Script" path="res://Scripts/AnimatedCharacterController.gd" id="3_17fsh"]
 [ext_resource type="Script" path="res://Scripts/MovementController.gd" id="4_goul0"]
-[ext_resource type="Script" path="res://Scripts/PatrollingAIBehaviour.gd" id="5_62pmi"]
+[ext_resource type="Script" path="res://Scripts/EnemyBehaviour/TurnOnBumpBehaviour.gd" id="5_ym71a"]
 [ext_resource type="Script" path="res://Scripts/LivingBehaviour.gd" id="6_ydwg4"]
+[ext_resource type="Script" path="res://Scripts/EnemyBehaviour/PlatformPatrolBehaviour.gd" id="7_xs3su"]
+[ext_resource type="Script" path="res://Scripts/EnemyBehaviour/KillPlayerOnTouchBehaviour.gd" id="8_ibu23"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t0ovp"]
-radius = 7.25
-height = 17.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g7siq"]
+size = Vector2(15, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sndib"]
 atlas = ExtResource("1_tqn8l")
@@ -83,9 +85,16 @@ collision_layer = 4
 collision_mask = 13
 platform_floor_layers = 4294901768
 
+[node name="PlayerDeathCollider(Area2D)" type="Area2D" parent="."]
+scale = Vector2(4, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDeathCollider(Area2D)"]
+position = Vector2(0, 2.75)
+shape = SubResource("RectangleShape2D_g7siq")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(4, 4)
-shape = SubResource("CapsuleShape2D_t0ovp")
+shape = ExtResource("1_4x8bu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 4)
@@ -95,6 +104,13 @@ animation = &"idle"
 [node name="RayCast2D" type="RayCast2D" parent="."]
 scale = Vector2(4, 4)
 target_position = Vector2(0, 10)
+collision_mask = 8
+
+[node name="PlatformCheck" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="PlatformCheck"]
+position = Vector2(-28, 0)
+target_position = Vector2(0, 40)
 collision_mask = 8
 
 [node name="SlopedCharacterController" type="Node" parent="." node_paths=PackedStringArray("characterBody", "sprite", "ray")]
@@ -115,11 +131,17 @@ character = NodePath("..")
 direction = -1.0
 SPEED = 200.0
 
-[node name="PatrollingAIBehaviour" type="Node" parent="." node_paths=PackedStringArray("movement_controller")]
-script = ExtResource("5_62pmi")
+[node name="TurnOnBumpBehaviour" type="Node" parent="." node_paths=PackedStringArray("movement_controller")]
+script = ExtResource("5_ym71a")
 movement_controller = NodePath("../MovementController")
 
 [node name="LivingBehaviour" type="Node" parent="." node_paths=PackedStringArray("character_body", "movement_controller")]
 script = ExtResource("6_ydwg4")
 character_body = NodePath("..")
 movement_controller = NodePath("../MovementController")
+
+[node name="PlatformPatrolBehaviour" type="Node" parent="."]
+script = ExtResource("7_xs3su")
+
+[node name="KillPlayerOnTouchBehaviour" type="Node" parent="."]
+script = ExtResource("8_ibu23")
