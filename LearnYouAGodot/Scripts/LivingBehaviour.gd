@@ -10,10 +10,12 @@ extends Node
 var _collision_layers
 var _collision_mask
 
+signal died
 
 func kill():
 	if is_alive:
 		is_alive = false
+		died.emit()
 		movement_controller.direction = 0
 		_collision_layers = character_body.collision_layer
 		character_body.collision_layer = 0
