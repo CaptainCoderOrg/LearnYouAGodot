@@ -1,10 +1,13 @@
-[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://dnmwiqwo7h8h7"]
+[gd_resource type="TileSet" load_steps=12 format=3 uid="uid://dnmwiqwo7h8h7"]
 
 [ext_resource type="Texture2D" uid="uid://cag110l3ohguw" path="res://Sprites/oga-tofuman-tiles.png" id="1_hhfe6"]
 [ext_resource type="PackedScene" uid="uid://c7l2pcxehv22p" path="res://Nodes/spikes.tscn" id="2_wciv3"]
-[ext_resource type="PackedScene" uid="uid://glwktcqa2iqq" path="res://Nodes/enemy_(character_body_2d).tscn" id="3_noibm"]
+[ext_resource type="PackedScene" uid="uid://glwktcqa2iqq" path="res://Nodes/Enemy/enemy_(character_body_2d).tscn" id="3_xtk1v"]
 [ext_resource type="PackedScene" uid="uid://clesuolpiayyr" path="res://Nodes/coin.tscn" id="4_1f00n"]
 [ext_resource type="PackedScene" uid="uid://ch5mhn0q7c500" path="res://Nodes/spikes_down.tscn" id="5_0w61w"]
+[ext_resource type="PackedScene" uid="uid://bvgw2mp1or6fa" path="res://Nodes/spikes_half.tscn" id="6_nfvs5"]
+[ext_resource type="PackedScene" uid="uid://b6pl5tt22r6cm" path="res://Nodes/Enemy/fast_enemy.tscn" id="7_odiyu"]
+[ext_resource type="PackedScene" uid="uid://epe8fyn63uuc" path="res://Nodes/Enemy/no_move_enemy.tscn" id="8_q7phy"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_0y2lp"]
 tile_data = PackedInt32Array(0, 262144, 2, 1, 65536, 0, 2, 65536, 0, 3, 65536, 0, 4, 327680, 2)
@@ -292,9 +295,12 @@ texture = ExtResource("1_hhfe6")
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_xhtrj"]
 resource_name = "Hazards"
 scenes/1/scene = ExtResource("2_wciv3")
-scenes/2/scene = ExtResource("3_noibm")
+scenes/2/scene = ExtResource("3_xtk1v")
 scenes/3/scene = ExtResource("4_1f00n")
 scenes/4/scene = ExtResource("5_0w61w")
+scenes/5/scene = ExtResource("6_nfvs5")
+scenes/6/scene = ExtResource("7_odiyu")
+scenes/7/scene = ExtResource("8_q7phy")
 
 [resource]
 physics_layer_0/collision_layer = 8

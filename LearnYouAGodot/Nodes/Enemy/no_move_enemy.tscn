@@ -1,0 +1,146 @@
+[gd_scene load_steps=19 format=3 uid="uid://epe8fyn63uuc"]
+
+[ext_resource type="Shape2D" uid="uid://bsplsps6pwkpr" path="res://Nodes/Enemy/enemy_shape.tres" id="1_dhy6w"]
+[ext_resource type="Texture2D" uid="uid://chrfw7yfhjwbm" path="res://Sprites/oga-tofuman-sprites.png" id="2_gdcq5"]
+[ext_resource type="Script" path="res://Scripts/SlopedCharacterController.gd" id="3_i8opv"]
+[ext_resource type="Script" path="res://Scripts/AnimatedCharacterController.gd" id="4_ql23p"]
+[ext_resource type="Script" path="res://Scripts/MovementController.gd" id="5_ua8rx"]
+[ext_resource type="Script" path="res://Scripts/EnemyBehaviour/TurnOnBumpBehaviour.gd" id="6_hggne"]
+[ext_resource type="Script" path="res://Scripts/RespawnLivingBehaviour.gd" id="7_gjydg"]
+[ext_resource type="Script" path="res://Scripts/EnemyBehaviour/PlatformPatrolBehaviour.gd" id="8_j73x5"]
+[ext_resource type="Script" path="res://Scripts/EnemyBehaviour/KillPlayerOnTouchBehaviour.gd" id="9_nvm3t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g7siq"]
+size = Vector2(14, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sndib"]
+atlas = ExtResource("2_gdcq5")
+region = Rect2(64, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxfrx"]
+atlas = ExtResource("2_gdcq5")
+region = Rect2(64, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhjnq"]
+atlas = ExtResource("2_gdcq5")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0jcq"]
+atlas = ExtResource("2_gdcq5")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilcrl"]
+atlas = ExtResource("2_gdcq5")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ss8v0"]
+atlas = ExtResource("2_gdcq5")
+region = Rect2(64, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_px5ud"]
+atlas = ExtResource("2_gdcq5")
+region = Rect2(64, 64, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ho838"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sndib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxfrx")
+}],
+"loop": false,
+"name": &"death",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhjnq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0jcq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilcrl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ss8v0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_px5ud")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Enemy (CharacterBody2D)" type="CharacterBody2D" parent="." groups=["StompableEnemy"]]
+collision_layer = 4
+collision_mask = 13
+platform_floor_layers = 4294901768
+
+[node name="PlayerDeathCollider(Area2D)" type="Area2D" parent="Enemy (CharacterBody2D)"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy (CharacterBody2D)/PlayerDeathCollider(Area2D)"]
+position = Vector2(0, 2.75)
+shape = SubResource("RectangleShape2D_g7siq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy (CharacterBody2D)"]
+shape = ExtResource("1_dhy6w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy (CharacterBody2D)"]
+sprite_frames = SubResource("SpriteFrames_ho838")
+animation = &"idle"
+
+[node name="RayCast2D" type="RayCast2D" parent="Enemy (CharacterBody2D)"]
+target_position = Vector2(0, 10)
+collision_mask = 8
+
+[node name="PlatformCheck" type="Node2D" parent="Enemy (CharacterBody2D)"]
+
+[node name="RayCast2D" type="RayCast2D" parent="Enemy (CharacterBody2D)/PlatformCheck"]
+position = Vector2(-8, 0)
+target_position = Vector2(0, 10)
+collision_mask = 8
+
+[node name="SlopedCharacterController" type="Node" parent="Enemy (CharacterBody2D)" node_paths=PackedStringArray("characterBody", "sprite", "ray")]
+script = ExtResource("3_i8opv")
+characterBody = NodePath("..")
+sprite = NodePath("../AnimatedSprite2D")
+ray = NodePath("../RayCast2D")
+
+[node name="AnimatedCharacterController" type="Node" parent="Enemy (CharacterBody2D)" node_paths=PackedStringArray("character", "animated_sprite")]
+script = ExtResource("4_ql23p")
+character = NodePath("..")
+animated_sprite = NodePath("../AnimatedSprite2D")
+flip_h = true
+
+[node name="MovementController" type="Node" parent="Enemy (CharacterBody2D)" node_paths=PackedStringArray("character")]
+script = ExtResource("5_ua8rx")
+character = NodePath("..")
+direction = -1.0
+
+[node name="TurnOnBumpBehaviour" type="Node" parent="Enemy (CharacterBody2D)" node_paths=PackedStringArray("movement_controller")]
+script = ExtResource("6_hggne")
+movement_controller = NodePath("../MovementController")
+
+[node name="LivingBehaviour" type="Node" parent="Enemy (CharacterBody2D)" node_paths=PackedStringArray("movement_controller", "spawn_point", "body")]
+script = ExtResource("7_gjydg")
+movement_controller = NodePath("../MovementController")
+spawn_point = NodePath("../..")
+body = NodePath("..")
+
+[node name="PlatformPatrolBehaviour" type="Node" parent="Enemy (CharacterBody2D)"]
+script = ExtResource("8_j73x5")
+
+[node name="KillPlayerOnTouchBehaviour" type="Node" parent="Enemy (CharacterBody2D)" node_paths=PackedStringArray("area_2d")]
+script = ExtResource("9_nvm3t")
+area_2d = NodePath("../PlayerDeathCollider(Area2D)")

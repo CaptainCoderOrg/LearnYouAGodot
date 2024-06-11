@@ -185,7 +185,6 @@ animations = [{
 [node name="Node2D" type="Node2D"]
 
 [node name="Player (CharacterBody2D)" type="CharacterBody2D" parent="." groups=["Player"]]
-position = Vector2(2834, 187)
 collision_mask = 15
 floor_snap_length = 60.0
 platform_floor_layers = 4294901768
