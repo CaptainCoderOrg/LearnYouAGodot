@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://bn1ub1dhgl6ln"]
+
+[ext_resource type="Script" path="res://Settings/settings_menu_controller.gd" id="1_ej07e"]
+[ext_resource type="Resource" uid="uid://vtgic6d04f8p" path="res://Settings/audio_settings.tres" id="2_fkyw2"]
+
+[sub_resource type="Theme" id="Theme_whsit"]
+default_font_size = 32
+
+[node name="PanelContainer" type="PanelContainer"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 227.0
+offset_bottom = 193.0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme = SubResource("Theme_whsit")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Tofu Land"
+horizontal_alignment = 1
+
+[node name="VSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer3/VBoxContainer"]
+layout_mode = 2
+text = "Music Volume"
+horizontal_alignment = 1
+
+[node name="Music Slider" type="HSlider" parent="MarginContainer/VBoxContainer3/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer3/VBoxContainer2"]
+layout_mode = 2
+text = "SFX Volume"
+horizontal_alignment = 1
+
+[node name="SFX Slider" type="HSlider" parent="MarginContainer/VBoxContainer3/VBoxContainer2"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+
+[node name="SettingsMenuController" type="Node" parent="."]
+script = ExtResource("1_ej07e")
+audio_settings = ExtResource("2_fkyw2")
+
+[connection signal="value_changed" from="MarginContainer/VBoxContainer3/VBoxContainer/Music Slider" to="SettingsMenuController" method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer3/VBoxContainer2/SFX Slider" to="SettingsMenuController" method="_on_sfx_slider_value_changed"]

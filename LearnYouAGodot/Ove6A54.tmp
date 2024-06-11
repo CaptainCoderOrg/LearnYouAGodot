@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg325w2sd8dhe"]
+
+[ext_resource type="Texture2D" uid="uid://ctkc550qfa3n1" path="res://Sprites/icons/gear_w.png" id="1_ty181"]
+[ext_resource type="PackedScene" uid="uid://bn1ub1dhgl6ln" path="res://Settings/SettingsMenu.tscn" id="2_pjsuv"]
+[ext_resource type="Script" path="res://ShowMenuButton.gd" id="3_w1mt8"]
+[ext_resource type="Resource" uid="uid://vtgic6d04f8p" path="res://Settings/audio_settings.tres" id="4_jfwtc"]
+
+[node name="Overlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" parent="." instance=ExtResource("2_pjsuv")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -124.5
+offset_top = -122.0
+offset_right = 124.5
+offset_bottom = 122.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -108.0
+offset_top = -108.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(108, 108)
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Button" type="Button" parent="MarginContainer"]
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("1_ty181")
+flat = true
+script = ExtResource("3_w1mt8")
+audio_settings = ExtResource("4_jfwtc")
+
+[connection signal="pressed" from="MarginContainer/Button" to="MarginContainer/Button" method="_on_pressed"]

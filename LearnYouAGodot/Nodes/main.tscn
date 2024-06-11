@@ -1,11 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://mnxj3jn17b0a"]
+[gd_scene load_steps=9 format=3 uid="uid://mnxj3jn17b0a"]
 
 [ext_resource type="PackedScene" uid="uid://dev27edc5nxmy" path="res://Nodes/Player/tofuman.tscn" id="2_t8dse"]
 [ext_resource type="Resource" uid="uid://ckpc1kwvvgnwt" path="res://stats.tres" id="2_vl017"]
+[ext_resource type="AudioStream" uid="uid://bape50xk5dmcq" path="res://Music/arcade_carnival.ogg" id="5_5ou3x"]
 [ext_resource type="Script" path="res://Scripts/CoinLabel.gd" id="6_cje0f"]
+[ext_resource type="Script" path="res://Nodes/AudioStreamPlayer.gd" id="6_hwrot"]
+[ext_resource type="PackedScene" uid="uid://bg325w2sd8dhe" path="res://Overlay.tscn" id="7_l4p02"]
+[ext_resource type="Resource" uid="uid://vtgic6d04f8p" path="res://Settings/audio_settings.tres" id="7_ultgn"]
 [ext_resource type="TileSet" uid="uid://dnmwiqwo7h8h7" path="res://tile_set.tres" id="12_a25bx"]
 
-[node name="Node2D2" type="Node2D"]
+[node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-2, 2)
@@ -31,3 +35,19 @@ theme_override_font_sizes/font_size = 36
 text = "Coins: 0"
 script = ExtResource("6_cje0f")
 stats = ExtResource("2_vl017")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_5ou3x")
+volume_db = -80.0
+autoplay = true
+script = ExtResource("6_hwrot")
+audio_settings = ExtResource("7_ultgn")
+
+[node name="Tani\'s UI Name Here Really Awesome We need it bE tHiS WaY DonT ChanGE whaTeVERYouj DO" type="CanvasLayer" parent="."]
+
+[node name="Overlay" parent="Tani\'s UI Name Here Really Awesome We need it bE tHiS WaY DonT ChanGE whaTeVERYouj DO" instance=ExtResource("7_l4p02")]
+
+[connection signal="body_entered" from="TileMap/Coin" to="TileMap/Coin" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@391008" to="TileMap/@Area2D@391008" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@391050" to="TileMap/@Area2D@391050" method="_on_body_entered"]
+[connection signal="body_entered" from="TileMap/@Area2D@391051" to="TileMap/@Area2D@391051" method="_on_body_entered"]
