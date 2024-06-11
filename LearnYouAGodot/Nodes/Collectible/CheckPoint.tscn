@@ -1,0 +1,98 @@
+[gd_scene load_steps=13 format=3 uid="uid://b6n3p4n0erkyo"]
+
+[ext_resource type="Texture2D" uid="uid://chrfw7yfhjwbm" path="res://Sprites/oga-tofuman-sprites.png" id="1_4ibqr"]
+[ext_resource type="Script" path="res://Scripts/Collectibles/CheckPointBehaviour.gd" id="2_msxrp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_be4vu"]
+atlas = ExtResource("1_4ibqr")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1s2ig"]
+atlas = ExtResource("1_4ibqr")
+region = Rect2(144, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0mda"]
+atlas = ExtResource("1_4ibqr")
+region = Rect2(160, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqb25"]
+atlas = ExtResource("1_4ibqr")
+region = Rect2(176, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k11f6"]
+atlas = ExtResource("1_4ibqr")
+region = Rect2(128, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxc41"]
+atlas = ExtResource("1_4ibqr")
+region = Rect2(144, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0mvh"]
+atlas = ExtResource("1_4ibqr")
+region = Rect2(160, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2beaw"]
+atlas = ExtResource("1_4ibqr")
+region = Rect2(176, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rptwn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_be4vu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s2ig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0mda")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aqb25")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"collect",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k11f6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxc41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0mvh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2beaw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gwytt"]
+radius = 4.12311
+
+[node name="CheckPoint" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_rptwn")
+animation = &"collect"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_gwytt")
+
+[node name="CheckPointBehaviour" type="Node" parent="." node_paths=PackedStringArray("area_2d", "animation", "spawn_point")]
+script = ExtResource("2_msxrp")
+area_2d = NodePath("../Area2D")
+animation = NodePath("../AnimatedSprite2D")
+spawn_point = NodePath("..")

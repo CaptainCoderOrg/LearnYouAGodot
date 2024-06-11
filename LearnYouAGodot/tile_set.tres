@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=12 format=3 uid="uid://dnmwiqwo7h8h7"]
+[gd_resource type="TileSet" load_steps=14 format=3 uid="uid://dnmwiqwo7h8h7"]
 
 [ext_resource type="Texture2D" uid="uid://cag110l3ohguw" path="res://Sprites/oga-tofuman-tiles.png" id="1_hhfe6"]
 [ext_resource type="PackedScene" uid="uid://c7l2pcxehv22p" path="res://Nodes/spikes.tscn" id="2_wciv3"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bvgw2mp1or6fa" path="res://Nodes/spikes_half.tscn" id="6_nfvs5"]
 [ext_resource type="PackedScene" uid="uid://b6pl5tt22r6cm" path="res://Nodes/Enemy/fast_enemy.tscn" id="7_odiyu"]
 [ext_resource type="PackedScene" uid="uid://epe8fyn63uuc" path="res://Nodes/Enemy/no_move_enemy.tscn" id="8_q7phy"]
+[ext_resource type="PackedScene" uid="uid://b6n3p4n0erkyo" path="res://Nodes/Collectible/CheckPoint.tscn" id="9_c5p51"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_0y2lp"]
 tile_data = PackedInt32Array(0, 262144, 2, 1, 65536, 0, 2, 65536, 0, 3, 65536, 0, 4, 327680, 2)
@@ -302,9 +303,14 @@ scenes/5/scene = ExtResource("6_nfvs5")
 scenes/6/scene = ExtResource("7_odiyu")
 scenes/7/scene = ExtResource("8_q7phy")
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_mulkh"]
+resource_name = "Collectibles"
+scenes/1/scene = ExtResource("9_c5p51")
+
 [resource]
 physics_layer_0/collision_layer = 8
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_qby4m")
 sources/1 = SubResource("TileSetScenesCollectionSource_xhtrj")
+sources/2 = SubResource("TileSetScenesCollectionSource_mulkh")
 pattern_0 = SubResource("TileMapPattern_0y2lp")
