@@ -1,7 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://b6pl5tt22r6cm"]
+[gd_scene load_steps=11 format=3 uid="uid://b6pl5tt22r6cm"]
 
 [ext_resource type="Shape2D" uid="uid://bsplsps6pwkpr" path="res://Nodes/Enemy/enemy_shape.tres" id="1_1wm3e"]
-[ext_resource type="Texture2D" uid="uid://chrfw7yfhjwbm" path="res://Sprites/oga-tofuman-sprites.png" id="2_a6nqi"]
+[ext_resource type="SpriteFrames" uid="uid://dxbt0pkduq5w0" path="res://Nodes/Enemy/enemy_animations.tres" id="2_mbskl"]
 [ext_resource type="Script" path="res://Scripts/SlopedCharacterController.gd" id="3_4mooa"]
 [ext_resource type="Script" path="res://Scripts/AnimatedCharacterController.gd" id="4_2timk"]
 [ext_resource type="Script" path="res://Scripts/MovementController.gd" id="5_h7onb"]
@@ -12,73 +12,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g7siq"]
 size = Vector2(14, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sndib"]
-atlas = ExtResource("2_a6nqi")
-region = Rect2(64, 96, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uxfrx"]
-atlas = ExtResource("2_a6nqi")
-region = Rect2(64, 112, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xhjnq"]
-atlas = ExtResource("2_a6nqi")
-region = Rect2(64, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v0jcq"]
-atlas = ExtResource("2_a6nqi")
-region = Rect2(64, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ilcrl"]
-atlas = ExtResource("2_a6nqi")
-region = Rect2(64, 32, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ss8v0"]
-atlas = ExtResource("2_a6nqi")
-region = Rect2(64, 48, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_px5ud"]
-atlas = ExtResource("2_a6nqi")
-region = Rect2(64, 64, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ho838"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sndib")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uxfrx")
-}],
-"loop": false,
-"name": &"death",
-"speed": 1.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xhjnq")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v0jcq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ilcrl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ss8v0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_px5ud")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 10.0
-}]
 
 [node name="Node2D" type="Node2D"]
 
@@ -97,7 +30,7 @@ shape = SubResource("RectangleShape2D_g7siq")
 shape = ExtResource("1_1wm3e")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy (CharacterBody2D)"]
-sprite_frames = SubResource("SpriteFrames_ho838")
+sprite_frames = ExtResource("2_mbskl")
 animation = &"idle"
 
 [node name="RayCast2D" type="RayCast2D" parent="Enemy (CharacterBody2D)"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dev27edc5nxmy"]
+[gd_scene load_steps=26 format=3 uid="uid://dev27edc5nxmy"]
 
 [ext_resource type="Texture2D" uid="uid://chrfw7yfhjwbm" path="res://Sprites/oga-tofuman-sprites.png" id="1_k8gbv"]
 [ext_resource type="Script" path="res://Scripts/SlopedCharacterController.gd" id="2_jov4q"]
@@ -127,6 +127,22 @@ region = Rect2(16, 112, 16, 16)
 atlas = ExtResource("1_k8gbv")
 region = Rect2(16, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_co8oy"]
+atlas = ExtResource("1_k8gbv")
+region = Rect2(176, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l868t"]
+atlas = ExtResource("1_k8gbv")
+region = Rect2(160, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rotah"]
+atlas = ExtResource("1_k8gbv")
+region = Rect2(144, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj6ap"]
+atlas = ExtResource("1_k8gbv")
+region = Rect2(128, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_uitr4"]
 atlas = ExtResource("1_k8gbv")
 region = Rect2(16, 16, 16, 16)
@@ -166,6 +182,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_co8oy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l868t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rotah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gj6ap")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"respawn",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_uitr4")
 }, {
 "duration": 1.0,
@@ -182,7 +218,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 
 [node name="Player (CharacterBody2D)" type="CharacterBody2D" parent="." groups=["Player"]]
 collision_mask = 15
@@ -222,7 +258,7 @@ libraries = {
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player (CharacterBody2D)"]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_xwhng")
-animation = &"death"
+animation = &"respawn"
 
 [node name="SlopedCharacterController" type="Node" parent="Player (CharacterBody2D)" node_paths=PackedStringArray("characterBody", "sprite", "ray")]
 script = ExtResource("2_jov4q")
@@ -235,7 +271,7 @@ script = ExtResource("3_kmhv2")
 character = NodePath("..")
 animated_sprite = NodePath("../AnimatedSprite2D")
 animation_player = NodePath("../AnimationPlayer")
-splat_rarity = 0.25
+splat_rarity = 0.1
 
 [node name="MovementController" type="Node" parent="Player (CharacterBody2D)" node_paths=PackedStringArray("character")]
 script = ExtResource("4_rnsba")
