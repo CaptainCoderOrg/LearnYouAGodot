@@ -35,13 +35,16 @@ func kill():
 func respawn():
 	respawn_animation.play()
 	respawn_animation.show()
+	body.hide()
+	body.global_position = spawn_point.global_position
 	await respawn_animation.animation_finished
+	body.show()
 	is_alive = true
 	body.velocity.y = 0
+	body.global_position = spawn_point.global_position
 	movement_controller.direction = 1
 	body.collision_layer = _collision_layers
 	body.collision_mask = _collision_mask
-	body.global_position = spawn_point.global_position
 	respawn_animation.hide()
 	
 
