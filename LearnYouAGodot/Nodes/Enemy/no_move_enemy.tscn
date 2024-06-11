@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://epe8fyn63uuc"]
+[gd_scene load_steps=12 format=3 uid="uid://epe8fyn63uuc"]
 
 [ext_resource type="Shape2D" uid="uid://bsplsps6pwkpr" path="res://Nodes/Enemy/enemy_shape.tres" id="1_dhy6w"]
+[ext_resource type="PackedScene" uid="uid://bjyyom8v3t7ip" path="res://Nodes/RespawnAnimation.tscn" id="1_q5a3u"]
 [ext_resource type="SpriteFrames" uid="uid://dxbt0pkduq5w0" path="res://Nodes/Enemy/enemy_animations.tres" id="2_1gwi6"]
 [ext_resource type="Script" path="res://Scripts/SlopedCharacterController.gd" id="3_i8opv"]
 [ext_resource type="Script" path="res://Scripts/AnimatedCharacterController.gd" id="4_ql23p"]
@@ -14,6 +15,8 @@
 size = Vector2(14, 10)
 
 [node name="Node2D" type="Node2D"]
+
+[node name="RespawnAnimatedSprite2D" parent="." instance=ExtResource("1_q5a3u")]
 
 [node name="Enemy (CharacterBody2D)" type="CharacterBody2D" parent="." groups=["StompableEnemy"]]
 collision_layer = 4
@@ -65,12 +68,12 @@ direction = -1.0
 script = ExtResource("6_hggne")
 movement_controller = NodePath("../MovementController")
 
-[node name="LivingBehaviour" type="Node" parent="Enemy (CharacterBody2D)" node_paths=PackedStringArray("movement_controller", "spawn_point", "body", "animated_sprite")]
+[node name="LivingBehaviour" type="Node" parent="Enemy (CharacterBody2D)" node_paths=PackedStringArray("movement_controller", "spawn_point", "body", "respawn_animation")]
 script = ExtResource("7_gjydg")
 movement_controller = NodePath("../MovementController")
 spawn_point = NodePath("../..")
 body = NodePath("..")
-animated_sprite = NodePath("../AnimatedSprite2D")
+respawn_animation = NodePath("../../RespawnAnimatedSprite2D")
 
 [node name="PlatformPatrolBehaviour" type="Node" parent="Enemy (CharacterBody2D)"]
 script = ExtResource("8_j73x5")

@@ -1,5 +1,6 @@
-[gd_scene load_steps=26 format=3 uid="uid://dev27edc5nxmy"]
+[gd_scene load_steps=27 format=3 uid="uid://dev27edc5nxmy"]
 
+[ext_resource type="PackedScene" uid="uid://bjyyom8v3t7ip" path="res://Nodes/RespawnAnimation.tscn" id="1_8e34u"]
 [ext_resource type="Texture2D" uid="uid://chrfw7yfhjwbm" path="res://Sprites/oga-tofuman-sprites.png" id="1_k8gbv"]
 [ext_resource type="Script" path="res://Scripts/SlopedCharacterController.gd" id="2_jov4q"]
 [ext_resource type="Script" path="res://Scripts/AnimatedCharacterController.gd" id="3_kmhv2"]
@@ -220,6 +221,9 @@ animations = [{
 
 [node name="Node2D2" type="Node2D"]
 
+[node name="RespawnAnimatedSprite2D" parent="." instance=ExtResource("1_8e34u")]
+scale = Vector2(4, 4)
+
 [node name="Player (CharacterBody2D)" type="CharacterBody2D" parent="." groups=["Player"]]
 collision_mask = 15
 floor_snap_length = 60.0
@@ -293,9 +297,10 @@ movement_controller = NodePath("../MovementController")
 player_controller = NodePath("../PlayerController")
 bounce_force = -500.0
 
-[node name="LivingBehaviour" type="Node" parent="Player (CharacterBody2D)" node_paths=PackedStringArray("movement_controller", "spawn_point", "body")]
+[node name="LivingBehaviour" type="Node" parent="Player (CharacterBody2D)" node_paths=PackedStringArray("movement_controller", "spawn_point", "body", "respawn_animation")]
 script = ExtResource("8_gojm0")
 respawn_time = 2.0
 movement_controller = NodePath("../MovementController")
 spawn_point = NodePath("../..")
 body = NodePath("..")
+respawn_animation = NodePath("../../RespawnAnimatedSprite2D")

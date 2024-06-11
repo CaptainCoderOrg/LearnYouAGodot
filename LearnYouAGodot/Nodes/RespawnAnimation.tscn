@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://bjyyom8v3t7ip"]
+
+[ext_resource type="Texture2D" uid="uid://chrfw7yfhjwbm" path="res://Sprites/oga-tofuman-sprites.png" id="1_qlfwv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0h6s"]
+atlas = ExtResource("1_qlfwv")
+region = Rect2(176, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tq5ft"]
+atlas = ExtResource("1_qlfwv")
+region = Rect2(160, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rnoy"]
+atlas = ExtResource("1_qlfwv")
+region = Rect2(144, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gjrp"]
+atlas = ExtResource("1_qlfwv")
+region = Rect2(128, 80, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6031v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0h6s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tq5ft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rnoy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1gjrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rnoy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1gjrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rnoy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1gjrp")
+}],
+"loop": false,
+"name": &"default",
+"speed": 4.0
+}]
+
+[node name="RespawnAnimatedSprite2D" type="AnimatedSprite2D"]
+z_index = 2
+sprite_frames = SubResource("SpriteFrames_6031v")
+frame = 7
+frame_progress = 1.0

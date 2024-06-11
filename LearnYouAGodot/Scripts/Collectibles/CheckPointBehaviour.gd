@@ -33,6 +33,7 @@ func check_collect(body : Node2D):
 	if body.is_in_group("Player") and not is_collected:
 		var livingBehaviour : LivingBehaviour = body.get_node("LivingBehaviour")
 		livingBehaviour.spawn_point = spawn_point
+		livingBehaviour.respawn_animation.global_position = spawn_point.global_position
 		animation.animation = "collect"
 		animation.play()
 		is_collected = true
