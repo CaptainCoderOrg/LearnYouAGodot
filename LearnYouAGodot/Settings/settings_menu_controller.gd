@@ -1,8 +1,8 @@
 class_name SettingsMenuController
 extends Node
 
-@onready var music_slider = $"../MarginContainer/VBoxContainer3/VBoxContainer/Music Slider"
-@onready var sfx_slider = $"../MarginContainer/VBoxContainer3/VBoxContainer2/SFX Slider"
+@onready var sfx_slider = %"SFX Slider"
+@onready var music_slider = %"Music Slider"
 
 func _ready():
 	music_slider.value = __audio.music_volume

@@ -41,6 +41,7 @@ text = "Music Volume"
 horizontal_alignment = 1
 
 [node name="Music Slider" type="HSlider" parent="MarginContainer/VBoxContainer3/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 max_value = 1.0
 step = 0.01
@@ -54,6 +55,7 @@ text = "SFX Volume"
 horizontal_alignment = 1
 
 [node name="SFX Slider" type="HSlider" parent="MarginContainer/VBoxContainer3/VBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 max_value = 1.0
 step = 0.01

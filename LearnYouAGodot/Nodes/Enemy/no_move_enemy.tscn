@@ -1,83 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://epe8fyn63uuc"]
+[gd_scene load_steps=2 format=3 uid="uid://epe8fyn63uuc"]
 
-[ext_resource type="Shape2D" uid="uid://bsplsps6pwkpr" path="res://Nodes/Enemy/enemy_shape.tres" id="1_dhy6w"]
-[ext_resource type="PackedScene" uid="uid://bjyyom8v3t7ip" path="res://Nodes/RespawnAnimation.tscn" id="1_q5a3u"]
-[ext_resource type="SpriteFrames" uid="uid://dxbt0pkduq5w0" path="res://Nodes/Enemy/enemy_animations.tres" id="2_1gwi6"]
-[ext_resource type="Script" path="res://Scripts/SlopedCharacterController.gd" id="3_i8opv"]
-[ext_resource type="Script" path="res://Scripts/AnimatedCharacterController.gd" id="4_ql23p"]
-[ext_resource type="Script" path="res://Scripts/MovementController.gd" id="5_ua8rx"]
-[ext_resource type="Script" path="res://Scripts/EnemyBehaviour/TurnOnBumpBehaviour.gd" id="6_hggne"]
-[ext_resource type="Script" path="res://Scripts/RespawnLivingBehaviour.gd" id="7_gjydg"]
-[ext_resource type="Script" path="res://Scripts/EnemyBehaviour/PlatformPatrolBehaviour.gd" id="8_j73x5"]
-[ext_resource type="Script" path="res://Scripts/EnemyBehaviour/KillPlayerOnTouchBehaviour.gd" id="9_nvm3t"]
+[ext_resource type="PackedScene" uid="uid://glwktcqa2iqq" path="res://Nodes/Enemy/enemy.tscn" id="1_p3bht"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g7siq"]
-size = Vector2(14, 10)
+[node name="Node2D" instance=ExtResource("1_p3bht")]
 
-[node name="Node2D" type="Node2D"]
-
-[node name="RespawnAnimatedSprite2D" parent="." instance=ExtResource("1_q5a3u")]
-
-[node name="Enemy (CharacterBody2D)" type="CharacterBody2D" parent="." groups=["StompableEnemy"]]
-collision_layer = 4
-collision_mask = 13
-platform_floor_layers = 4294901768
-
-[node name="PlayerDeathCollider(Area2D)" type="Area2D" parent="Enemy (CharacterBody2D)"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy (CharacterBody2D)/PlayerDeathCollider(Area2D)"]
-position = Vector2(0, 2.75)
-shape = SubResource("RectangleShape2D_g7siq")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy (CharacterBody2D)"]
-shape = ExtResource("1_dhy6w")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy (CharacterBody2D)"]
-sprite_frames = ExtResource("2_1gwi6")
-animation = &"respawn"
-
-[node name="RayCast2D" type="RayCast2D" parent="Enemy (CharacterBody2D)"]
-target_position = Vector2(0, 10)
-collision_mask = 8
-
-[node name="PlatformCheck" type="Node2D" parent="Enemy (CharacterBody2D)"]
-
-[node name="RayCast2D" type="RayCast2D" parent="Enemy (CharacterBody2D)/PlatformCheck"]
-position = Vector2(-8, 0)
-target_position = Vector2(0, 10)
-collision_mask = 8
-
-[node name="SlopedCharacterController" type="Node" parent="Enemy (CharacterBody2D)" node_paths=PackedStringArray("characterBody", "sprite", "ray")]
-script = ExtResource("3_i8opv")
-characterBody = NodePath("..")
-sprite = NodePath("../AnimatedSprite2D")
-ray = NodePath("../RayCast2D")
-
-[node name="AnimatedCharacterController" type="Node" parent="Enemy (CharacterBody2D)" node_paths=PackedStringArray("character", "animated_sprite")]
-script = ExtResource("4_ql23p")
-character = NodePath("..")
-animated_sprite = NodePath("../AnimatedSprite2D")
-flip_h = true
-
-[node name="MovementController" type="Node" parent="Enemy (CharacterBody2D)" node_paths=PackedStringArray("character")]
-script = ExtResource("5_ua8rx")
-character = NodePath("..")
-direction = -1.0
-
-[node name="TurnOnBumpBehaviour" type="Node" parent="Enemy (CharacterBody2D)" node_paths=PackedStringArray("movement_controller")]
-script = ExtResource("6_hggne")
-movement_controller = NodePath("../MovementController")
-
-[node name="LivingBehaviour" type="Node" parent="Enemy (CharacterBody2D)" node_paths=PackedStringArray("movement_controller", "spawn_point", "body", "respawn_animation")]
-script = ExtResource("7_gjydg")
-movement_controller = NodePath("../MovementController")
-spawn_point = NodePath("../..")
-body = NodePath("..")
-respawn_animation = NodePath("../../RespawnAnimatedSprite2D")
-
-[node name="PlatformPatrolBehaviour" type="Node" parent="Enemy (CharacterBody2D)"]
-script = ExtResource("8_j73x5")
-
-[node name="KillPlayerOnTouchBehaviour" type="Node" parent="Enemy (CharacterBody2D)" node_paths=PackedStringArray("area_2d")]
-script = ExtResource("9_nvm3t")
-area_2d = NodePath("../PlayerDeathCollider(Area2D)")
+[node name="MovementController" parent="Enemy (CharacterBody2D)" index="7"]
+SPEED = 0.0

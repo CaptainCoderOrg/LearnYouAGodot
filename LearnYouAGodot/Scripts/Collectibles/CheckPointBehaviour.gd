@@ -4,6 +4,7 @@ extends Node
 @export var area_2d : Area2D
 @export var animation : AnimatedSprite2D
 @export var spawn_point : Node2D
+@onready var sfxr_stream_player = %SfxrStreamPlayer
 
 var is_collected = false
 
@@ -37,3 +38,5 @@ func check_collect(body : Node2D):
 		animation.animation = "collect"
 		animation.play()
 		is_collected = true
+		sfxr_stream_player.play()
+		

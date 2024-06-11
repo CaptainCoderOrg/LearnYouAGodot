@@ -7,11 +7,13 @@ extends Node
 @export var spawn_point : Node2D
 @export var body : CharacterBody2D
 @export var respawn_animation : AnimatedSprite2D
+@onready var sfxr_stream_player = %SfxrStreamPlayer
 
 var _collision_layers
 var _collision_mask
 
 signal died
+signal spawn
 
 func _ready():
 	_collision_layers = body.collision_layer
@@ -20,6 +22,7 @@ func _ready():
 
 func kill():
 	if is_alive:
+		if sfxr_stream_player: sfxr_stream_player.play()
 		is_alive = false
 		died.emit()
 		movement_controller.direction = 0
@@ -38,6 +41,7 @@ func respawn():
 	body.hide()
 	body.global_position = spawn_point.global_position
 	await respawn_animation.animation_finished
+	spawn.emit()
 	body.show()
 	is_alive = true
 	body.velocity.y = 0
