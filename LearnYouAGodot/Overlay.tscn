@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bg325w2sd8dhe"]
+[gd_scene load_steps=4 format=3 uid="uid://bg325w2sd8dhe"]
 
 [ext_resource type="Texture2D" uid="uid://ctkc550qfa3n1" path="res://Sprites/icons/gear_w.png" id="1_ty181"]
 [ext_resource type="PackedScene" uid="uid://bn1ub1dhgl6ln" path="res://Settings/SettingsMenu.tscn" id="2_pjsuv"]
 [ext_resource type="Script" path="res://ShowMenuButton.gd" id="3_w1mt8"]
-[ext_resource type="Resource" uid="uid://vtgic6d04f8p" path="res://Settings/audio_settings.tres" id="4_jfwtc"]
 
 [node name="Overlay" type="Control"]
 layout_mode = 3
@@ -50,6 +49,5 @@ focus_mode = 0
 icon = ExtResource("1_ty181")
 flat = true
 script = ExtResource("3_w1mt8")
-audio_settings = ExtResource("4_jfwtc")
 
 [connection signal="pressed" from="MarginContainer/Button" to="MarginContainer/Button" method="_on_pressed"]

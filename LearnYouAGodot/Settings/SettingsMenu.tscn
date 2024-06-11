@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bn1ub1dhgl6ln"]
+[gd_scene load_steps=3 format=3 uid="uid://bn1ub1dhgl6ln"]
 
 [ext_resource type="Script" path="res://Settings/settings_menu_controller.gd" id="1_ej07e"]
-[ext_resource type="Resource" uid="uid://vtgic6d04f8p" path="res://Settings/audio_settings.tres" id="2_fkyw2"]
 
 [sub_resource type="Theme" id="Theme_whsit"]
 default_font_size = 32
@@ -61,7 +60,6 @@ step = 0.01
 
 [node name="SettingsMenuController" type="Node" parent="."]
 script = ExtResource("1_ej07e")
-audio_settings = ExtResource("2_fkyw2")
 
 [connection signal="value_changed" from="MarginContainer/VBoxContainer3/VBoxContainer/Music Slider" to="SettingsMenuController" method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer3/VBoxContainer2/SFX Slider" to="SettingsMenuController" method="_on_sfx_slider_value_changed"]
