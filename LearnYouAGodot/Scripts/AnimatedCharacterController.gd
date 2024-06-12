@@ -5,7 +5,7 @@ extends Node
 @export var animated_sprite : AnimatedSprite2D
 @export var animation_player : AnimationPlayer
 @export var flip_h : bool
-## Probabilty of the SPLAT! animation showing up.
+## Probability of the SPLAT! animation showing up.
 @export var splat_rarity: float = 0.9
 @onready var living_behaviour = $"../LivingBehaviour"
 @onready var random_chance: float = randf()
