@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dev27edc5nxmy" path="res://Nodes/Player/tofuman.tscn" id="2_t8dse"]
 [ext_resource type="AudioStream" uid="uid://bape50xk5dmcq" path="res://Music/arcade_carnival.ogg" id="5_5ou3x"]
 [ext_resource type="PackedScene" uid="uid://bg325w2sd8dhe" path="res://Overlay.tscn" id="7_l4p02"]
-[ext_resource type="TileSet" uid="uid://dnmwiqwo7h8h7" path="res://tile_set.tres" id="12_a25bx"]
+[ext_resource type="TileSet" uid="uid://dnmwiqwo7h8h7" path="res://map_tile_set.tres" id="12_a25bx"]
 
 [node name="Node2D" type="Node2D"]
 

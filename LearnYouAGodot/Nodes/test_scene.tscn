@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://jgwkowenulqa"]
 
-[ext_resource type="TileSet" uid="uid://dnmwiqwo7h8h7" path="res://tile_set.tres" id="1_7bhpb"]
+[ext_resource type="TileSet" uid="uid://dnmwiqwo7h8h7" path="res://map_tile_set.tres" id="1_7bhpb"]
 [ext_resource type="Texture2D" uid="uid://chrfw7yfhjwbm" path="res://Sprites/oga-tofuman-sprites.png" id="2_10rg3"]
 [ext_resource type="Script" path="res://Scripts/SlopedCharacterController.gd" id="3_p2ol6"]
 [ext_resource type="Script" path="res://Scripts/AnimatedCharacterController.gd" id="4_tl8y6"]
