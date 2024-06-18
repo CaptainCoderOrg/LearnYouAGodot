@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://lp46pdacshxf"]
+
+[ext_resource type="Script" path="res://Scene/read_key_controller.gd" id="1_cf0u7"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+visible = false
+script = ExtResource("1_cf0u7")
+
+[node name="ReadKeyScene" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="ReadKeyScene"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ReadKeyScene"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "Waiting for key press..."
+horizontal_alignment = 1
+vertical_alignment = 1

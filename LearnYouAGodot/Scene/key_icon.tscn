@@ -1,9 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://c741sh8pnrebd"]
+[gd_scene load_steps=10 format=3 uid="uid://c741sh8pnrebd"]
 
 [ext_resource type="Texture2D" uid="uid://bvflv0djsyxhs" path="res://Sprites/key.svg" id="1_chp3m"]
 [ext_resource type="Script" path="res://Scripts/KeyBindingController.gd" id="2_3vfuv"]
 [ext_resource type="FontFile" uid="uid://ckarskvq2f2wa" path="res://Fonts/joystix monospace.otf" id="2_ameqh"]
 [ext_resource type="Script" path="res://Scripts/AutoFontSizeLabel.gd" id="4_kfka7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gquai"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b7pbr"]
+bg_color = Color(0, 0, 0, 0.286275)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mbs5m"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xyjj2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c5362"]
 
 [node name="KeyIcon" type="NinePatchRect"]
 offset_right = 48.0
@@ -37,3 +52,18 @@ vertical_alignment = 1
 clip_text = true
 script = ExtResource("4_kfka7")
 max_font_size = 20
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gquai")
+theme_override_styles/hover = SubResource("StyleBoxFlat_b7pbr")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_mbs5m")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_xyjj2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_c5362")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

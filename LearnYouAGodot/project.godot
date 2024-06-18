@@ -18,6 +18,7 @@ config/icon="res://Sprites/icon.svg"
 [autoload]
 
 __audio="*res://Scripts/audio_singleton.gd"
+__read_key_modal="*res://Scene/ReadKeyScene.tscn"
 
 [display]
 
