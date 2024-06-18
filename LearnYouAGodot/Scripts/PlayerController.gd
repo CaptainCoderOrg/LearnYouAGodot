@@ -38,4 +38,4 @@ func _physics_process(delta):
 		character.velocity.y = JUMP_VELOCITY * JUMP_MULTIPLIER
 		jump_frames = 0
 	
-	direction_changed.emit(Input.get_axis("ui_left", "ui_right"))
+	direction_changed.emit(Input.get_axis("left", "right"))
