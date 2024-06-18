@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bn1ub1dhgl6ln"]
+[gd_scene load_steps=4 format=3 uid="uid://bn1ub1dhgl6ln"]
 
 [ext_resource type="Script" path="res://Settings/settings_menu_controller.gd" id="1_ej07e"]
+[ext_resource type="FontFile" uid="uid://ckarskvq2f2wa" path="res://Fonts/joystix monospace.otf" id="1_opu3a"]
 
 [sub_resource type="Theme" id="Theme_whsit"]
 default_font_size = 32
@@ -24,6 +25,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer3"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_opu3a")
 theme_override_font_sizes/font_size = 48
 text = "Tofu Land"
 horizontal_alignment = 1
@@ -37,6 +39,8 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer3/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_opu3a")
+theme_override_font_sizes/font_size = 24
 text = "Music Volume"
 horizontal_alignment = 1
 
@@ -51,6 +55,8 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer3/VBoxContainer2"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_opu3a")
+theme_override_font_sizes/font_size = 24
 text = "SFX Volume"
 horizontal_alignment = 1
 

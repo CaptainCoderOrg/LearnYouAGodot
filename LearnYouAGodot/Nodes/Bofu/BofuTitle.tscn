@@ -47,4 +47,4 @@ animations = [{
 [node name="BofuTitle" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_c5a43")
 autoplay = "default"
-frame_progress = 0.682766
+frame_progress = 0.397394

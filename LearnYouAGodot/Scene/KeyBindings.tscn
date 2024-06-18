@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=3 uid="uid://20n6jibv3576"]
+
+[ext_resource type="PackedScene" uid="uid://c741sh8pnrebd" path="res://Scene/key_icon.tscn" id="1_cw7g3"]
+
+[node name="KeyBindings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Right" parent="." instance=ExtResource("1_cw7g3")]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 72.0
+offset_right = 184.0
+offset_bottom = 120.0
+event_name = &"right"
+
+[node name="Left" parent="." instance=ExtResource("1_cw7g3")]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 72.0
+offset_right = 56.0
+offset_bottom = 120.0
+event_name = &"left"
+
+[node name="Down" parent="." instance=ExtResource("1_cw7g3")]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 72.0
+offset_right = 120.0
+offset_bottom = 120.0
+event_name = &"down"
+
+[node name="Up" parent="." instance=ExtResource("1_cw7g3")]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 56.0
+event_name = &"up"
+
+[node name="Run" parent="." instance=ExtResource("1_cw7g3")]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 136.0
+offset_right = 184.0
+offset_bottom = 184.0
+event_name = &"run"
+
+[node name="Jump" parent="." instance=ExtResource("1_cw7g3")]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 136.0
+offset_right = 120.0
+offset_bottom = 184.0
+event_name = &"jump"
