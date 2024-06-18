@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b47cgnf6u3i2a"]
+
+[ext_resource type="SpriteFrames" uid="uid://dxbt0pkduq5w0" path="res://Nodes/Enemy/enemy_animations.tres" id="1_0tfd8"]
+
+[node name="EnemyIdleTitle" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_0tfd8")
+animation = &"idle"
+autoplay = "idle"

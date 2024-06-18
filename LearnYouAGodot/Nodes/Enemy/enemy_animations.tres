@@ -1,6 +1,7 @@
-[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://dxbt0pkduq5w0"]
+[gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://dxbt0pkduq5w0"]
 
 [ext_resource type="Texture2D" uid="uid://chrfw7yfhjwbm" path="res://Sprites/oga-tofuman-sprites.png" id="1_ujj6a"]
+[ext_resource type="Texture2D" uid="uid://dh5kohgmrnidw" path="res://Sprites/beanie-idle.png" id="2_t1xod"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sndib"]
 atlas = ExtResource("1_ujj6a")
@@ -10,9 +11,13 @@ region = Rect2(64, 96, 16, 16)
 atlas = ExtResource("1_ujj6a")
 region = Rect2(64, 112, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xhjnq"]
-atlas = ExtResource("1_ujj6a")
-region = Rect2(64, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_t463u"]
+atlas = ExtResource("2_t1xod")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kspsw"]
+atlas = ExtResource("2_t1xod")
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1n5b3"]
 atlas = ExtResource("1_ujj6a")
@@ -61,11 +66,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xhjnq")
+"texture": SubResource("AtlasTexture_t463u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kspsw")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,

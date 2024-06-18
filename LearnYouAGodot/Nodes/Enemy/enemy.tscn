@@ -39,6 +39,7 @@ shape = ExtResource("2_rrpsd")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy (CharacterBody2D)"]
 sprite_frames = ExtResource("3_4txi4")
 animation = &"idle"
+autoplay = "idle"
 
 [node name="RayCast2D" type="RayCast2D" parent="Enemy (CharacterBody2D)"]
 target_position = Vector2(0, 10)

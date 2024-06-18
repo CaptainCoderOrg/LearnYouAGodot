@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6smnbirrqs5r"]
+
+[ext_resource type="Texture2D" uid="uid://f328fyirrnrt" path="res://Sprites/bofu.png" id="1_kylja"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uihea"]
+atlas = ExtResource("1_kylja")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lbte"]
+atlas = ExtResource("1_kylja")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_piyf3"]
+atlas = ExtResource("1_kylja")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c38xw"]
+atlas = ExtResource("1_kylja")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c5a43"]
+animations = [{
+"frames": [{
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_uihea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3lbte")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_piyf3")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_c38xw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_piyf3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3lbte")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="BofuTitle" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_c5a43")
+autoplay = "default"
+frame_progress = 0.682766

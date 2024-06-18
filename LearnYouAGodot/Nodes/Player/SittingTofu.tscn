@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://cusvwupwn4yfk"]
+
+[ext_resource type="Texture2D" uid="uid://bh3ht7as6amu5" path="res://Sprites/tofu-sitting.png" id="1_ix14s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwgjg"]
+atlas = ExtResource("1_ix14s")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_de28o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwgjg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwafy"]
+atlas = ExtResource("1_ix14s")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_14jy8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwafy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="SittingTofu" type="Node2D"]
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_de28o")
+
+[node name="FeetSprite" type="AnimatedSprite2D" parent="."]
+z_index = 2
+sprite_frames = SubResource("SpriteFrames_14jy8")
+autoplay = "default"
+frame_progress = 0.588013
