@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dev27edc5nxmy"]
+[gd_scene load_steps=33 format=3 uid="uid://dev27edc5nxmy"]
 
 [ext_resource type="PackedScene" uid="uid://bjyyom8v3t7ip" path="res://Nodes/RespawnAnimation.tscn" id="1_8e34u"]
 [ext_resource type="Texture2D" uid="uid://chrfw7yfhjwbm" path="res://Sprites/oga-tofuman-sprites.png" id="1_k8gbv"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" path="res://Scripts/StompEnemyAttackBehaviour.gd" id="7_1d4gq"]
 [ext_resource type="Script" path="res://Scripts/RespawnLivingBehaviour.gd" id="8_gojm0"]
 [ext_resource type="Script" path="res://addons/godot_sfxr/SfxrStreamPlayer.gd" id="10_e5tgj"]
+[ext_resource type="Script" path="res://Scripts/ExplosionParticleHandler.gd" id="10_pn7xm"]
+[ext_resource type="PackedScene" uid="uid://bxt3o2s7ucgqm" path="res://Nodes/explosion_particles.tscn" id="11_1repl"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerSFXController.gd" id="11_vq42t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kb204"]
@@ -278,11 +280,12 @@ characterBody = NodePath("..")
 sprite = NodePath("../AnimatedSprite2D")
 ray = NodePath("../RayCast2D")
 
-[node name="AnimatedCharacterController" type="Node" parent="Player (CharacterBody2D)" node_paths=PackedStringArray("character", "animated_sprite", "animation_player")]
+[node name="AnimatedCharacterController" type="Node" parent="Player (CharacterBody2D)" node_paths=PackedStringArray("character", "animated_sprite", "animation_player", "explosion_particle_handler")]
 script = ExtResource("3_kmhv2")
 character = NodePath("..")
 animated_sprite = NodePath("../AnimatedSprite2D")
 animation_player = NodePath("../AnimationPlayer")
+explosion_particle_handler = NodePath("../ExplosionParticleHandler")
 splat_rarity = 0.1
 
 [node name="MovementController" type="Node" parent="Player (CharacterBody2D)" node_paths=PackedStringArray("character")]
@@ -312,6 +315,12 @@ movement_controller = NodePath("../MovementController")
 spawn_point = NodePath("../..")
 body = NodePath("..")
 respawn_animation = NodePath("../../RespawnAnimatedSprite2D")
+
+[node name="ExplosionParticleHandler" type="Node" parent="Player (CharacterBody2D)" node_paths=PackedStringArray("sprite", "character")]
+script = ExtResource("10_pn7xm")
+explosion_particles = ExtResource("11_1repl")
+sprite = NodePath("../AnimatedSprite2D")
+character = NodePath("..")
 
 [node name="Respawn" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
